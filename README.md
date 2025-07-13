@@ -1,1 +1,1 @@
-# architecture-propdevelopment
+# architecture-propdevelopment 7й спринт

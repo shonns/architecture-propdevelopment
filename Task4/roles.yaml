@@ -1,0 +1,32 @@
+# Роль admin
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: admin
+rules:
+- apiGroups: [""]
+  resources: ["*"]
+  verbs: ["*"]
+  
+--- 
+# Роль editor
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: editor
+rules:
+- apiGroups: [""]
+  resources: ["deployments", "pods", "services", "configmaps", "jobs"]
+  verbs: ["get", "list", "watch", "create", "update", "delete"]
+    
+---  
+# Роль viewer
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: viewer
+rules:
+- apiGroups: [""]
+    resources: ["pods", "services", "endpoints", "configmaps"]
+    verbs: ["get", "list", "watch"]

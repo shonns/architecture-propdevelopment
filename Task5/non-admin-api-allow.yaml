@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: non-admin-api-allow
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      role: back-end-api  # Применяем политику к back-end API
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          role: front-end  # Разрешаем трафик только от front-end
+
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: admin-api-allow
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      role: admin-back-end-api  # Применяем политику к admin back-end API
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          role: admin-front-end  # Разрешаем трафик только от admin front-end
